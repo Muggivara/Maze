@@ -10,7 +10,7 @@ int coins = 0; // счётчик собранных монет
 COORD infobox;
 int health = 100;
 int steps = 0;
-int energy = 100;
+int energy = 80;
 // function definition (определение функции)
 // настройка размеров шрифта
 void SetConsoleFont()
@@ -73,6 +73,12 @@ void ShowEnergy()
 
 }
 
+int cube(int number)
+{
+	return pow(number, 3);
+}
+
+
 int main()
 {
 	// enumeration (перечисление - это набор именованных целочисленных констант)
@@ -107,7 +113,7 @@ int main()
 
 			if (maze[y][x] == MazeObject::ENEMY) // если в лабиринте сгенерился враг
 			{
-				int probability = rand() % 15; // 0...14, если выпало 0 - враг останется, останется только одна пятая часть врагов
+				int probability = rand() % 14; // 0...14, если выпало 0 - враг останется, останется только одна пятая часть врагов
 				if (probability != 0) // убираем врага
 				{
 					maze[y][x] = MazeObject::HALL; // на место врага ставим коридор
@@ -125,7 +131,7 @@ int main()
 
 			if (maze[y][x] == MazeObject::HEALTHBOX)
 			{
-				int probability = rand() % 10;
+				int probability = rand() % 6;
 				if (probability != 0)
 				{
 					maze[y][x] == MazeObject::HALL;
@@ -165,7 +171,7 @@ int main()
 				cout << (char)178;
 				break;
 
-			case MazeObject::HEALTHBOX://healthbox - аптечка
+			case MazeObject::HEALTHBOX: // healthbox - аптечка
 				SetConsoleTextAttribute(h, Color::BLUE);
 				cout << "*";
 				break;
@@ -209,6 +215,7 @@ int main()
 	{
 		ShowSteps();
 		ShowEnergy();
+		
 
 		if (_kbhit()) // если было нажатие на клавиши пользователем
 		{
@@ -285,6 +292,7 @@ int main()
 			if (maze[position.Y][position.X] == MazeObject::COIN)
 			{
 				coins++; // на одну монетку собрали больше
+				energy += 10;
 				ShowCoins();
 				maze[position.Y][position.X] = MazeObject::HALL; // убираем монетку из лабиринта
 			}
@@ -296,7 +304,24 @@ int main()
 					health += 100;
 					maze[position.Y][position.X] = MazeObject::HALL;
 				}
+				else 
+				{
+					maze[position.Y][position.X] = MazeObject::HALL;
+				}
+			}
 
+			if(energy <= 0)
+			{
+				int answer = MessageBoxA(0, "Energy is over!\n\nwant to play again?", "FAIL!", MB_YESNO);
+				system("cls");
+				if (answer == IDYES)
+				{
+					main();
+				}
+				else
+				{
+					exit(0);
+				}
 			}
 
 			// пересечение с врагами
