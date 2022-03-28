@@ -83,7 +83,7 @@ int main()
 {
 	// enumeration (перечисление - это набор именованных целочисленных констант)
 	// MazeObject - пользовательский (кастомизированный) тип данных
-	enum MazeObject { HALL, WALL, COIN, ENEMY, BORDER, HEALTHBOX };
+	enum MazeObject { HALL, WALL, COIN, ENEMY, HEALTHBOX, BORDER };
 
 	enum KeyCode { ENTER = 13, ESCAPE = 27, SPACE = 32, LEFT = 75, RIGHT = 77, UP = 72, DOWN = 80 };
 
@@ -109,7 +109,7 @@ int main()
 	{
 		for (int x = 0; x < WIDTH; x++) // перебор столбцов
 		{
-			maze[y][x] = rand() % 4; // 4 типа объектов в игре
+			maze[y][x] = rand() % 5; // 4 типа объектов в игре
 
 			if (maze[y][x] == MazeObject::ENEMY) // если в лабиринте сгенерился враг
 			{
@@ -131,7 +131,7 @@ int main()
 
 			if (maze[y][x] == MazeObject::HEALTHBOX)
 			{
-				int probability = rand() % 6;
+				int probability = rand() % 3;
 				if (probability != 0)
 				{
 					maze[y][x] == MazeObject::HALL;
