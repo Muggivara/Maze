@@ -44,7 +44,7 @@ void ShowHealth()
 	SetConsoleTextAttribute(h, Color::DARKRED);
 	cout << "HEALTH: ";
 	SetConsoleTextAttribute(h, Color::RED);
-	cout << health << "\n";
+	cout << health << " \n";
 }
 
 void ShowSteps()
@@ -55,7 +55,7 @@ void ShowSteps()
 	SetConsoleTextAttribute(h, Color::DARKRED);
 	cout << "Steps:";
 	SetConsoleTextAttribute(h, Color::BLUE);
-	cout << steps << "\n";
+	cout << steps << " \n";
 
 
 }
@@ -68,7 +68,7 @@ void ShowEnergy()
 	SetConsoleTextAttribute(h, Color::DARKRED);
 	cout << "Energy:";
 	SetConsoleTextAttribute(h, Color::BLUE);
-	cout << energy << "\n";
+	cout << energy << " \n";
 
 
 }
@@ -316,6 +316,7 @@ int main()
 				system("cls");
 				if (answer == IDYES)
 				{
+					energy = 100;
 					main();
 				}
 				else
